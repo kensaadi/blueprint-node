@@ -1,0 +1,49 @@
+{
+  "name": "@dashforge/blueprint-node",
+  "version": "0.0.1",
+  "description": "Server SDK for Blueprint contracts (Node/TypeScript). Load a published contract, resolve its dynamic items, fill field defaults, validate, and serve it. Agnostic (validates against the frozen contract-v1 JSON Schema) and eval-free (PCI/CSP-safe).",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./schema": "./schema/contract-v1.schema.json"
+  },
+  "files": [
+    "dist",
+    "schema"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --clean",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "gen:types": "json2ts schema/contract-v1.schema.json --output src/contract.generated.ts --bannerComment \"/* GENERATED from schema/contract-v1.schema.json — do not edit. */\""
+  },
+  "dependencies": {
+    "@cfworker/json-schema": "^4.0.3"
+  },
+  "devDependencies": {
+    "json-schema-to-typescript": "^15.0.4",
+    "tsup": "^8.3.5",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.5"
+  },
+  "keywords": [
+    "dashforge",
+    "blueprint",
+    "sdui",
+    "server-driven-ui",
+    "contract",
+    "json-schema"
+  ],
+  "license": "MIT",
+  "sideEffects": false,
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
+  }
+}
